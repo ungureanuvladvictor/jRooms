@@ -12,12 +12,12 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, '(!!!) MongoDB connection error:'));
 db.once('open', function() { console.log("Connected to MongoDB database at mongodb://" + config.dbhost + '/' + config.dbname + "..."); });
 
-app.get('/login/:username/:password', function(user, pass) {
+app.get('/login/:username/:password', function(req, res) {
 
 	// Get actual values
-	var user = "fstankovsk";
-	var pass = "aaa";
-	return login.login(user, pass);
+	var data = req.params;
+
+	res.send(login.login(data.username, data.password));
 });
 app.get('/logout/:token', login.logout);
 

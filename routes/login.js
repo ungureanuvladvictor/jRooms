@@ -1,7 +1,7 @@
 
 
 exports.login = function(username, password) {
-	return "sometoken";
+	return "some token for " + username + " " + password;
 }
 
 exports.logout = function(token_string) {

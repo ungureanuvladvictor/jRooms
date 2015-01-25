@@ -19,7 +19,13 @@ app.get('/login/:username/:password', function(req, res) {
 
 	res.send(login.login(data.username, data.password));
 });
-app.get('/logout/:token', login.logout);
+app.get('/logout/:token', function(req, res) {
+
+	// Get actual values
+	var data = req.params;
+
+	res.send(login.logout(data.token));
+});
 
 app.get('/user', function(req, res) {
 	res.send('GET request to user');

@@ -1,6 +1,9 @@
 # Config file
 config.json
 
+# Mongodb database
+db
+
 # Logs
 logs
 *.log

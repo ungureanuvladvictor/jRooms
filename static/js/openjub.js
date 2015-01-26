@@ -34,19 +34,22 @@ JUB.loginResponse = function(e) {
 
 JUB.loginSucceeded = function() {
 	$.cookie('token', JUB.token,  { 'expires': 7, 'path': '/' });
-	alert("Login succeeded!");
 
-	window.location = 'index.html';
+	var e = new Event('JUB.LoginUpdated');
+	window.dispatchEvent(e);
 }
 
 JUB.loginFailed = function() {
 	alert("Login failed!");
 }
 
-JUB.tokenExpired = function(e) {
+JUB.logout = function(e) {
 	JUB.loggedIn = false;
 	JUB.token = null;
 	JUB.user = null;
 
 	$.removeCookie('token');
+
+	var e = new Event('JUB.LoginUpdated');
+	window.dispatchEvent(e);
 };

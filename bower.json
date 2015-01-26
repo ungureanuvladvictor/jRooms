@@ -1,0 +1,31 @@
+{
+  "name": "jRooms",
+  "version": "0.0.1",
+  "homepage": "https://github.com/OpenJUB/jRooms",
+  "authors": [
+    "Dmitrii Cucleschin <dmitrii.cucleschin@gmail.com>"
+  ],
+  "main": "app.js",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "jacobs",
+    "jub",
+    "room",
+    "allocation"
+  ],
+  "license": "GPL v2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "jquery-cookie": "~1.4.1",
+    "bootstrap": "~3.3.2"
+  }
+}

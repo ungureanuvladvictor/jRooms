@@ -32,9 +32,10 @@ app.get('/user', function(req, res) {
 	res.send('GET request to user');
 });
 
+
 app.get('/user/points', function(req, res) {
-	res.send(function() {
-		var filip = new Object() {
+
+	var filip = {
 			id : 1,
 			name : "Filip",
 			surname : "Stankovski",
@@ -44,8 +45,10 @@ app.get('/user/points', function(req, res) {
 			username : "fstankovsk",
 			current_college : "C3",
 			next_college : "C3"
-		}
-	});
+		};
+
+	var response = user.points(filip);
+	res.send(JSON.stringify(response));
 });
 
 var server = app.listen(3000, function() {

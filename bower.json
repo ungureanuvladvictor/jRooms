@@ -4,6 +4,7 @@
   "homepage": "https://github.com/OpenJUB/jRooms",
   "authors": [
     "Dmitrii Cucleschin <dmitrii.cucleschin@gmail.com>"
+    "Vlad Ungureanu <vvu@vdev.ro>"
   ],
   "main": "app.js",
   "moduleType": [

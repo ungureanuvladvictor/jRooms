@@ -5,20 +5,17 @@
 	<title>jRooms</title>
 	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-	<script type="text/javascript" src="./js/openjub.js"></script>
+	<script src="./js/openjub.js"></script>
 </head>
 <body>
 <script type="text/javascript">
-	if (!($.cookie('token'))) {
-		window.location = 'login.html';
-	}
-
 	window.onload = function() {
+		window.addEventListener("message", JUB.loginResponse, false);
 		window.addEventListener("JUBTokenExpired", JUB.tokenExpired, true);
 	};
 </script>
 
-Welcome!
+<button onclick="JUB.login();">Login</button>
 	
 </body>
 </html>

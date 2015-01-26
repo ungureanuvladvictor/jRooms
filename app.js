@@ -1,5 +1,6 @@
 var config = require('./config.json');
 var login = require('./routes/login');
+var user = require('./routes/user');
 
 var express = require('express');
 var app = express();
@@ -29,6 +30,22 @@ app.get('/logout/:token', function(req, res) {
 
 app.get('/user', function(req, res) {
 	res.send('GET request to user');
+});
+
+app.get('/user/points', function(req, res) {
+	res.send(function() {
+		var filip = new Object() {
+			id : 1,
+			name : "Filip",
+			surname : "Stankovski",
+			nationality : "Macedonia",
+			graduation_year : 2017,
+			roommates : [1],
+			username : "fstankovsk",
+			current_college : "C3",
+			next_college : "C3"
+		}
+	});
 });
 
 var server = app.listen(3000, function() {

@@ -7,7 +7,8 @@ userSchema = new Schema({
 		nationality : String,
 		graduation_year : Number,
 		roommates : Array,
-		pending_roommate_requests : Array,
+		pending_outgoing_roommate_requests : Array,
+		pending_incoming_roommate_requests : Array,
 		username : String,
 		current_college : String,
 		college_preference : Array,
@@ -78,10 +79,17 @@ exports.me = function(req, res) {
 	});
 }
 
-exports.points = function(user) { // Returns item that contains how many points the user got for each section. Should be externally controlled by a config file later on.
+exports.points = function(req, res) {
+	exports.get_by_token(req.cookies.token, function(user) {
+		res
+		.status(200)
+		.send(exports.calculate(user));
+	});
+}
+
+exports.calculate = function(user) { // Returns item that contains how many points the user got for each section. Should be externally controlled by a config file later on.
 
 	// Get individual points
-
 	var points = new Object();
 	points.magic_number = user.graduation_year - (new Date().getFullYear()) + 1;
 	points.year_points = config.year_points * points.magic_number; // 2 points if graduating next year, 1 if in 2 years.
@@ -177,5 +185,77 @@ exports.all = function(req, res) {
 		});
 		res.write(JSON.stringify(result));
 		res.end();
+	});
+}
+
+exports.add_roommate = function(req, res) {
+	var roommate = req.params.roommate;
+	exports.get_by_token(req.cookies.token, function(result) { // Get current user(will need the username later)
+		if(result.pending_outgoing_roommate_requests.indexOf(roommate) > -1) { // If the user is already listed as a roommate then return Not Modified
+			res
+			.status(304)
+			.send(result);
+			return;
+		}
+		// Else, update in both places.
+		User.update({token: req.cookies.token}, {$push: {pending_outgoing_roommate_requests: roommate}}, function(err, data) {
+			if(!data || data === 0) {
+				res
+				.status(500)
+				.send("Unexpected error.");
+				return;
+			}
+
+			User.update({username: roommate}, {$push: {pending_incoming_roommate_requests: result.username}}, function(error, updateResult) {
+				if(!updateResult || updateResult === 0) {
+					res
+					.status(500)
+					.send("Unexpected error.");
+					return;
+				}
+				exports.get_by_token(req.cookies.token, function(user) {
+					res
+					.status(200)
+					.send(user);
+				})
+			});
+		});
+	});
+}
+
+exports.confirm_roommate = function(req, res) {
+	var roommate = req.params.roommate;
+	exports.get_by_token(req.cookies.token, function(result) { // Get current user(will need the username later)
+		if(result.pending_outgoing_roommate_requests.indexOf(roommate) === -1) { // If the user is already listed as a roommate then return Not Modified
+			res
+			.status(404)
+			.send(result);
+			return;
+		}
+		// Else, update in both places.
+		User.update({token: req.cookies.token}, {$pull: {pending_outgoing_roommate_requests: roommate}, 
+												 $push: {roommates: roommate}}, function(err, data) {
+			if(!data || data === 0) {
+				res
+				.status(500)
+				.send("Unexpected error.");
+				return;
+			}
+
+			User.update({username: roommate}, {$pull: {pending_incoming_roommate_requests: result.username},
+											   $push: {roommates: roommate}}, function(error, updateResult) {
+				if(!updateResult || updateResult === 0) {
+					res
+					.status(500)
+					.send("Unexpected error.");
+					return;
+				}
+				exports.get_by_token(req.cookies.token, function(user) {
+					res
+					.status(200)
+					.send(user);
+				})
+			});
+		});
 	});
 }

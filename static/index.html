@@ -38,19 +38,18 @@
 	<script src="./lib/bootstrap/bootstrap.js"></script>
 	<script src="./js/openjub.js"></script>
 	<script>
+		JUB.init();
 		window.onload = function() {
 			var updateLogin = function() {
+				$('#loginButton').unbind('click');
 				if (JUB.loggedIn) {
-					$('#loginButton').unbind('click');
 					$('#loginButton').click(function() {
 						JUB.logout();
 					});
-					
+
 					$('#loginButton').text('Logout');
-					$('#loginInfo').text('Signed in as <...>');
 				}
 				else {
-					$('#loginButton').unbind('click');
 					$('#loginButton').click(function() {
 						JUB.login();
 					});
@@ -60,8 +59,15 @@
 				}
 			};
 
+			var updateMe = function() {
+				if (JUB.me) {
+					$('#loginInfo').text('Signed in as ' + JUB.me.name);
+				}
+			}
+
 			window.addEventListener("message", JUB.loginResponse, false);
 			window.addEventListener("JUB.LoginUpdated", updateLogin, true);
+			window.addEventListener("JUB.UserUpdated", updateMe, true);
 
 			updateLogin();
 		};

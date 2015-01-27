@@ -11,15 +11,17 @@ exports.load = function()
 	
 	var Schema = mongoose.Schema;
 	userSchema = new Schema({
-		id : Number,
 		name : String,
 		surname : String,
 		nationality : String,
 		graduation_year : Number,
 		roommates : Array,
+		pending_roommate_requests : Array,
 		username : String,
 		current_college : String,
-		next_college : String
+		college_preference : Array,
+		next_college : String,
+		token: String
 	});
 
 	User = mongoose.model('User', userSchema);

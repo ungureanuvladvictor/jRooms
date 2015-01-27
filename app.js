@@ -15,31 +15,20 @@ database.load();
 app.use(cookieParser());
 
 app.use(function(req, res, next) {
-	// console.log(req.cookies);
 	if(!req.cookies || !req.cookies.token) {
-		res.send(401, "Invalid access token");
+		res
+		.status(403)
+		.send("Invalid access token");
 	}
 	User.find({token: req.cookies.token}, function(err, data) {
 		if(!data || data.length === 0)  {
-			//console.log(data);
-			var url = "https://api.jacobs-cs.club/user/me";
-			request.cookie('token=' + req.cookies.token);
-			//console.log(data);
-			request({
-					method: 'GET',
-					uri: url,
-					headers: {'Cookie' : 'token=' + req.cookies.token}
-				}
-			, function(err, response, body) {
-				if(response == 'undefined') {
-					res.send("Error");
-				}
-				//console.log(response);
-				var user = JSON.parse(response.body);
-				User.update({username: user.username}, {token: req.cookies.token}, function(err, data2) {
-					next();
-				});
-			});
+			if(req.originalUrl === "/user/login") {
+				next();
+			} else {
+				res
+				.status(401)
+				.send("Unauthorized");
+			}
 		} else {
 			next();
 		}
@@ -64,20 +53,47 @@ app.get('/logout/:token', function(req, res) {
 app.get('/user/me', function(req, res) {
 	var tok = req.cookies.token;
 	User.findOne({token: tok}, function(err, data) {
-		res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
-		res.write(JSON.stringify(data));
-		res.end();
+		if(err) {
+			res
+			.status(404)
+			.send("You don't exist.");
+		} else {
+			res
+			.status(200)
+			.send(data);
+		}
 	});
 });
 
 app.post('/user/login', function(req, res) {
-	var tok = req.cookies.token;
-	User.findOne({token: tok}, function(err, data) {
-		res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
-		res.write(JSON.stringify(data));
-		res.end();
-	});
 
+	var url = "https://api.jacobs-cs.club/user/me";
+	request.cookie('token=' + req.cookies.token);
+	request({
+		method: 'GET',
+		uri: url,
+		headers: {'Cookie' : 'token=' + req.cookies.token}
+	}, function(err, response, body) {
+		var user = JSON.parse(response.body);
+		User.update({username: user.username}, {token: req.cookies.token}, function(err, numAffected) {
+			if(err || numAffected === 0) {
+				res
+				.status(404)
+				.send(null);
+			} else {
+				User.findOne({username: user.username}, function(err, data) {
+					if(err) {
+						res
+						.status(404)
+						.send("What the fuck just happened?");
+					}
+					res
+					.status(200)
+					.send(data);
+				});
+			}
+		});
+	});
 });
 
 app.get('/user/points', function(req, res) {

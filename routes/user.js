@@ -72,7 +72,7 @@ exports.update_users = function() {
 			nationality : "Moldova",
 			graduation_year : 2016,
 			roommates : [],
-			username : "dcucleschin",
+			username : "dcucleschi",
 			current_college : "Krupp",
 			next_college : "C3"
 		}),

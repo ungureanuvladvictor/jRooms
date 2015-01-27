@@ -75,15 +75,18 @@ app.get('/logout/:token', function(req, res) {
 
 app.get('/user/me', function(req, res) {
 	var tok = req.cookies.token;
-	User.find({token: tok}, function(err, data) {
+	User.findOne({token: tok}, function(err, data) {
 		res.write(JSON.stringify(data));
 		res.end();
 	});
 });
 
 app.post('/user/login', function(req, res) {
-	var cookie_token = "aaa";
-	res.send(req.cookies.token);
+	var tok = req.cookies.token;
+	User.findOne({token: tok}, function(err, data) {
+		res.write(JSON.stringify(data));
+		res.end();
+	});
 
 });
 
@@ -94,7 +97,7 @@ app.get('/user/points', function(req, res) {
 			surname : "Stankovski",
 			nationality : "Macedonia",
 			graduation_year : 2017,
-			roommates : [1],
+			roommates : ["fstankovsk"],
 			username : "fstankovsk",
 			current_college : "C3",
 			next_college : "C3"

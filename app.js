@@ -15,18 +15,16 @@ database.load();
 app.use(cookieParser());
 
 app.use(function(req, res, next) {
-	console.log(req.cookies);
+	// console.log(req.cookies);
 	if(!req.cookies || !req.cookies.token) {
 		res.send(401, "Invalid access token");
 	}
 	User.find({token: req.cookies.token}, function(err, data) {
-		if(data == 'undefined' || data == []) {
-			console.log(data);
-			next();
-		}
-		else {
+		if(!data || data.length === 0)  {
+			//console.log(data);
 			var url = "https://api.jacobs-cs.club/user/me";
 			request.cookie('token=' + req.cookies.token);
+			//console.log(data);
 			request({
 					method: 'GET',
 					uri: url,
@@ -36,24 +34,14 @@ app.use(function(req, res, next) {
 				if(response == 'undefined') {
 					res.send("Error");
 				}
-				console.log(response);
+				//console.log(response);
 				var user = JSON.parse(response.body);
-				User.findOne( {username: user.username}, function(err, data) {
-					console.log(data);
-					console.log(user);
-					if(data) {
-						data.token = req.cookies.token;
-						data.save();
-						console.log(data);
-						next();
-					}
-					else
-					{
-						res.write("Error2");
-						res.end();
-					}
+				User.update({username: user.username}, {token: req.cookies.token}, function(err, data2) {
+					next();
 				});
 			});
+		} else {
+			next();
 		}
 	});
 });
@@ -76,6 +64,7 @@ app.get('/logout/:token', function(req, res) {
 app.get('/user/me', function(req, res) {
 	var tok = req.cookies.token;
 	User.findOne({token: tok}, function(err, data) {
+		res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
 		res.write(JSON.stringify(data));
 		res.end();
 	});
@@ -84,6 +73,7 @@ app.get('/user/me', function(req, res) {
 app.post('/user/login', function(req, res) {
 	var tok = req.cookies.token;
 	User.findOne({token: tok}, function(err, data) {
+		res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
 		res.write(JSON.stringify(data));
 		res.end();
 	});
@@ -111,7 +101,7 @@ app.get('/user/points', function(req, res) {
 
 app.get('/user/all', function(req, res) {
 	User.find({}, function(err, users) {
-		console.log(users);
+		// console.log(users);
 		var result = [];
 		users.forEach(function(user) {
 			result.push(user);

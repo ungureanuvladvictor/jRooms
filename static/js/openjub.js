@@ -14,13 +14,13 @@ JUB.init = function() {
 		var req = $.get(JUB.url + '/user/me', {}, function(data) {
 			JUB.me = data;
 
-			console.log('Me succeeded!');
+			console.log('Me succeeded: ' + JSON.stringify(data));
 			var e = new Event('JUB.UserUpdated');
 			window.dispatchEvent(e);
 		});
 		
 		req.fail(function(err) {
-			console.log("Me failed: " + err);
+			console.log("Me failed: " + JSON.stringify(err));
 			JUB.logout();
 		});		
 	}
@@ -53,7 +53,7 @@ JUB.loginSucceeded = function() {
 
 	var req = $.post(JUB.url + '/user/login', {}, function(data) {
 		JUB.me = data;
-		console.log("Login succeeded: " + data);
+		console.log("Login succeeded: " + JSON.stringify(data));
 
 		var e = new Event('JUB.LoginUpdated');
 		window.dispatchEvent(e);
@@ -64,7 +64,7 @@ JUB.loginSucceeded = function() {
 
 
 	req.fail(function(err) {
-		console.log("Login failed: " + err);
+		console.log("Login failed: " + JSON.stringify(err));
 		JUB.logout();
 	});		
 }

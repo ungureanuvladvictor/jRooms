@@ -63,7 +63,8 @@ exports.update_users = function() {
 			roommates : [],
 			username : "fstankovsk",
 			current_college : "C3",
-			next_college : "C3"
+			next_college : "C3",
+			token : "aaa"
 		}),
 		new User({
 			name : "Dmitrii",

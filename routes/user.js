@@ -24,7 +24,8 @@ exports.points = function(user) { // Returns item that contains how many points 
 	points.individual_points = points.year_points + points.college_spirit;
 	points.total = points.individual_points;
 	// Get roommate points
-	if(user.roommates || user.roommates == null) {
+	if(!user.roommates && user.roommates !== null) {
+		console.log(user.roommates);
 		user.roommates.forEach(function(userId) {
 			var roommate = exports.get(userId);
 			points.nationality_points = config.nationality_points * (user.nationality != roommate.nationality);
@@ -42,7 +43,11 @@ exports.get_region = function(userId) {
 }
 
 exports.get = function(userId) {
-	return db.users.find( {id: userID} );
+	var result = [];
+	User.find( {username: userID}, function(err, users) {
+		result.push(users);
+	});
+	return result;
 }
 
 exports.update_users = function() {
@@ -51,7 +56,6 @@ exports.update_users = function() {
 
 	var ldap_users = [
 		new User({
-			id : 1,
 			name : "Filip",
 			surname : "Stankovski",
 			nationality : "Macedonia",
@@ -59,21 +63,20 @@ exports.update_users = function() {
 			roommates : [],
 			username : "fstankovsk",
 			current_college : "C3",
-			next_college : "C3"
+			next_college : "C3",
+			token : "aaa"
 		}),
 		new User({
-			id : 2,
 			name : "Dmitrii",
 			surname : "Cucleschin",
 			nationality : "Moldova",
 			graduation_year : 2016,
 			roommates : [],
-			username : "dcucleschin",
+			username : "dcucleschi",
 			current_college : "Krupp",
 			next_college : "C3"
 		}),
 		new User({
-			id : 3,
 			name : "Vlad",
 			surname : "Ungureanu",
 			nationality : "Romania",
@@ -93,13 +96,5 @@ exports.update_users = function() {
 }
 
 exports.all = function() {
-	User.find({}, function(err, users) {
-		console.log(users);
-		var result = [];
-		users.forEach(function(user) {
-			result.push(user);
-		});
-		res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
-		res.send(JSON.stringify(result));
-	});
+
 }

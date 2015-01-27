@@ -1,16 +1,82 @@
 var config = require('../config.json');
+var request = require('request');
 /*
-Stuff we'll need for the user:
-	ID
-	name
-	surname
-	nationality
-	graduation_year
-	roommates(null until roommate phase is over, array because of multiple roommates)
-	username
-	current_college
-	next_college
+userSchema = new Schema({
+		name : String,
+		surname : String,
+		nationality : String,
+		graduation_year : Number,
+		roommates : Array,
+		pending_roommate_requests : Array,
+		username : String,
+		current_college : String,
+		college_preference : Array,
+		next_college : String,
+		token: String
+	});
 */
+
+exports.login = function(req, res) {
+
+	var url = "https://api.jacobs-cs.club/user/me";
+	request.cookie('token=' + req.cookies.token);
+	request({
+		method: 'GET',
+		uri: url,
+		headers: {'Cookie' : 'token=' + req.cookies.token}
+	}, function(err, response, body) {
+		var user = JSON.parse(response.body);
+		User.update({username: user.username}, {token: req.cookies.token}, function(err, numAffected) {
+			if(err || numAffected === 0) {
+				res
+				.status(404)
+				.send(null);
+			} else {
+				User.findOne({username: user.username}, function(err, data) {
+					if(err) {
+						res
+						.status(404)
+						.send("What the fuck just happened?");
+					}
+					res
+					.status(200)
+					.send(data);
+				});
+			}
+		});
+	});
+}
+
+exports.logout = function(req, res) {
+
+	var tok = req.cookies.token;
+	User.update({token:tok}, {token:null}, function(err, numAffected) {
+		if(err) {
+			res
+			.status(404)
+			.send("Token not found");
+		} else {
+			res
+			.status(200)
+			.send(numAffected);
+		}
+	});
+}
+
+exports.me = function(req, res) {
+	var tok = req.cookies.token;
+	exports.get_by_token(tok, function(user) {
+		if(user) {
+			res
+			.status(200)
+			.send(user);
+		} else {
+			res
+			.status(404)
+			.send("You don't exist");
+		}
+	});
+}
 
 exports.points = function(user) { // Returns item that contains how many points the user got for each section. Should be externally controlled by a config file later on.
 
@@ -25,7 +91,7 @@ exports.points = function(user) { // Returns item that contains how many points 
 	points.total = points.individual_points;
 	// Get roommate points
 	if(!user.roommates && user.roommates !== null) {
-		console.log(user.roommates);
+		//console.log(user.roommates);
 		user.roommates.forEach(function(userId) {
 			var roommate = exports.get(userId);
 			points.nationality_points = config.nationality_points * (user.nationality != roommate.nationality);
@@ -42,17 +108,25 @@ exports.get_region = function(userId) {
 	return "SE Europe"; //config file
 }
 
-exports.get = function(userId) {
+exports.get = function(username) {
 	var result = [];
-	User.find( {username: userID}, function(err, users) {
+	User.find( {username: username}, function(err, users) {
 		result.push(users);
 	});
 	return result;
 }
 
+exports.get_by_token = function(tok, callback) {
+	User.findOne( {token: tok}, function(err, user) {
+		callback(user);
+	});
+}
+
 exports.update_users = function() {
 	if(config.started)
 		return "Cannot update the user database";
+
+	User.find({}).remove().exec();
 
 	var ldap_users = [
 		new User({
@@ -91,10 +165,17 @@ exports.update_users = function() {
 
 		ldap_users[i].save();
 	}
-	console.log(JSON.stringify(ldap_users));
+	// console.log(JSON.stringify(ldap_users));
 	return JSON.stringify(ldap_users);
 }
 
-exports.all = function() {
-
+exports.all = function(req, res) {
+	User.find({}, function(err, users) {
+		var result = [];
+		users.forEach(function(user) {
+			result.push(user);
+		});
+		res.write(JSON.stringify(result));
+		res.end();
+	});
 }

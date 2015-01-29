@@ -42,7 +42,8 @@ app.get('/user/me', user.me);
 app.get('/user/points', user.points);
 app.get('/admin/all', user.all);
 
-app.post('/admin/resetUsers', admin.reset_users);
+app.get('/admin/resetUsers', admin.reset_users);
+app.get('/user/resetUsers', user.reset_users);
 app.post('/user/login', user.login);
 app.post('/user/logout/', user.logout);
 app.post('/user/addRoommate/:roommate', user.add_roommate);

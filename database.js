@@ -23,10 +23,36 @@ exports.load = function()
 		current_college : String,
 		college_preference : Array,
 		next_college : String,
-		token: String
+		token: String,
+		is_tall: Boolean
+	});
+
+	roundSchema = new Schema({
+		name : String,
+		filters : {
+			points: Number, // lower cutoff
+			college: String,
+			tall_people: Boolean,
+			exchange_students: Boolean,
+			room_type: Number // Single room phase, Tall room phase, Triple room phase
+		},
+		duration: {
+			start: Date,
+			end: Date
+		}
+	});
+
+	roomSchema = new Schema({
+		college: String,
+		block: String,
+		floor: Number,
+		type: String,
+		contains: Array,
 	});
 
 	User = mongoose.model('User', userSchema);
+	Round = mongoose.model('Round', roundSchema);
+	Room = mongoose.model('Room', roomSchema);
 
 	userSchema.methods.get = function(cb) {
 		return this.model('User').find({}, cb);

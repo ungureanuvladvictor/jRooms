@@ -1,4 +1,4 @@
-- Import OpenJUB data (/admin/getUsers)
+- Import OpenJUB data (/admin/getUsers) - DONE.
 
 - Set phases (/admin/setPhases)
 	- name

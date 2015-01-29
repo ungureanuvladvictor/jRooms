@@ -22,6 +22,7 @@ exports.authorize = function(res, token, next) {
 						res
 						.status(404)
 						.send("What the fuck just happened?");
+						return;
 					}
 
 					if(config.admins.indexOf(user.username) > -1) {
@@ -37,10 +38,15 @@ exports.authorize = function(res, token, next) {
 	});
 }
 
+exports.delete_users = function(req, res) { //I will leave the current user, otherwise we run into problems.
+	var token = req.cookies.token;
+	User.$where('this.token === token').remove().exec();
+}
+
 exports.reset_users = function(req, res) {
 
 	//console.log(req);
-	User.find({}).remove().exec();
+	exports.delete_users(req, res);
 	var url = "https://api.jacobs-cs.club/user/";
 	var token = req.cookies.token;
 	request.cookie('token=' + token);
@@ -55,7 +61,14 @@ exports.reset_users = function(req, res) {
 			//var item = users[i];
 			var this_year = new Date().getFullYear();
 			if(item.status !== "undergrad" || item.year <= (this_year - 2000)) {
-				return;
+				if(config.admins.indexOf(item.username) > -1)
+				{
+
+				}
+				else
+				{
+					return;
+				}
 			}
 			fin.push(item);
 			var user = new User({
@@ -76,4 +89,23 @@ exports.reset_users = function(req, res) {
 		.status(200)
 		.send(JSON.stringify(fin));
 	});
+}
+
+exports.set_tall_people = function(req, res) {
+	var tall = req.params.tallPeople;
+	var modified = 0;
+	tall.forEach(function(item){
+		User.update({username:item}, {is_tall: true}, function(err, numAffected) { 
+			modified++;
+		});
+	});
+	if(modified !== tall.length) {
+		res
+		.status(500)
+		.send(modified);
+	} else {
+		res
+		.status(200)
+		.send(modified);
+	}
 }

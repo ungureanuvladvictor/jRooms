@@ -19,6 +19,7 @@ exports.load = function()
 		pending_outgoing_roommate_requests : Array,
 		pending_incoming_roommate_requests : Array,
 		username : String,
+		eid: Number,
 		current_college : String,
 		college_preference : Array,
 		next_college : String,

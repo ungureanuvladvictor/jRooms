@@ -1,5 +1,6 @@
 var config = require('./config.json');
 var user = require('./routes/user');
+var admin = require('./routes/admin');
 var database = require('./database');
 
 var express = require('express');
@@ -18,7 +19,10 @@ app.use(function(req, res, next) {
 		.status(403)
 		.send("Invalid access token");
 	}
-	User.find({token: req.cookies.token}, function(err, data) {
+	if(req.originalUrl.indexOf("/admin/") === 0 ) {
+		admin.authorize(res, req.cookies.token, next);
+	} else {
+		User.find({token: req.cookies.token}, function(err, data) {
 		if(!data || data.length === 0)  {
 			if(req.originalUrl === "/user/login") {
 				next();
@@ -31,20 +35,18 @@ app.use(function(req, res, next) {
 			next();
 		}
 	});
+	}
 });
 
-app.get('/user/logout/', user.logout);
 app.get('/user/me', user.me);
-app.post('/user/login', user.login);
 app.get('/user/points', user.points);
-app.get('/user/all', user.all);
+app.get('/admin/all', user.all);
+
+app.post('/admin/resetUsers', admin.reset_users);
+app.post('/user/login', user.login);
+app.post('/user/logout/', user.logout);
 app.post('/user/addRoommate/:roommate', user.add_roommate);
 app.post('/user/confirmRoommate/:roommate', user.confirm_roommate);
-
-app.get('/user/updateAll', function(req, res) { // I know I know it's get. We'll fix this later.
-	var updated = user.update_users();
-	res.send(updated);
-});
 
 var server = app.listen(3000, function() {
   	console.log("Listening at port " + server.address().port + "...");

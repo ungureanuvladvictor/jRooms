@@ -130,51 +130,9 @@ exports.get_by_token = function(tok, callback) {
 	});
 }
 
-exports.update_users = function() {
-	if(config.started)
-		return "Cannot update the user database";
-
-	User.find({}).remove().exec();
-
-	var ldap_users = [
-		new User({
-			name : "Filip",
-			surname : "Stankovski",
-			nationality : "Macedonia",
-			graduation_year : 2017,
-			roommates : [],
-			username : "fstankovsk",
-			current_college : "C3",
-			next_college : "C3",
-			token : "aaa"
-		}),
-		new User({
-			name : "Dmitrii",
-			surname : "Cucleschin",
-			nationality : "Moldova",
-			graduation_year : 2016,
-			roommates : [],
-			username : "dcucleschi",
-			current_college : "Krupp",
-			next_college : "C3"
-		}),
-		new User({
-			name : "Vlad",
-			surname : "Ungureanu",
-			nationality : "Romania",
-			graduation_year : 2015,
-			roommates : [],
-			username : "vungureanu",
-			current_college : "Krupp",
-			next_college : "Nordmetall"
-		})
-	]; // Should get ALL people from LDAP
-	for(i = 0; i < ldap_users.length; i++) {
-
-		ldap_users[i].save();
-	}
-	// console.log(JSON.stringify(ldap_users));
-	return JSON.stringify(ldap_users);
+exports.reset_users = function(req, res) {
+	var updated = exports.update_users();
+	res.send(updated);
 }
 
 exports.all = function(req, res) {

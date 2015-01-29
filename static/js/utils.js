@@ -7,6 +7,7 @@ var updateNav = function() {
 
 		$('#loginButton').text('Logout');
 		$('#logged_out').addClass('hidden');
+		$('#homeLink').attr('href', 'home.html');
 
 		if (JUB.me) {
 			$('#loginInfo').text('Signed in as ' + JUB.me.name);
@@ -23,6 +24,7 @@ var updateNav = function() {
 
 		$('#loginButton').text('Login');
 		$('#loginInfo').text('');
+		$('#homeLink').attr('href', 'index.html');
 		$('#adminLink').addClass('hidden');
 	}
 };

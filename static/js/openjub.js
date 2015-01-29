@@ -3,6 +3,7 @@ var JUB = {};
 JUB.me = null; 
 JUB.token = ($.cookie('token')) ? $.cookie('token') : null;
 JUB.loggedIn = ($.cookie('token')) ? true : false;
+JUB.isAdmin = true; // !!!!!!!!!!!! //
 JUB.authPopup = null;
 
 JUB.clientId = 'jrooms';
@@ -14,13 +15,11 @@ JUB.init = function() {
 		var req = $.get(JUB.url + '/user/me', {}, function(data) {
 			JUB.me = data;
 
-			console.log('Me succeeded: ' + JSON.stringify(data));
-			var e = new Event('JUB.UserUpdated');
+			var e = new Event('JUB.LoginUpdated');
 			window.dispatchEvent(e);
 		});
 		
 		req.fail(function(err) {
-			console.log("Me failed: " + JSON.stringify(err));
 			JUB.logout();
 		});		
 	}
@@ -57,9 +56,6 @@ JUB.loginSucceeded = function() {
 
 		var e = new Event('JUB.LoginUpdated');
 		window.dispatchEvent(e);
-
-		var f = new Event('JUB.UserUpdated');
-		window.dispatchEvent(f);
 	});
 
 
@@ -83,3 +79,6 @@ JUB.logout = function(e) {
 	var e = new Event('JUB.LoginUpdated');
 	window.dispatchEvent(e);
 };
+
+window.addEventListener('message', JUB.loginResponse);
+JUB.init();

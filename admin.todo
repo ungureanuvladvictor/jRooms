@@ -1,0 +1,27 @@
+- Import OpenJUB data (/admin/getUsers)
+
+- Set phases (/admin/setPhases)
+	- name
+	- filters
+		- points
+		- college
+		- tall people
+		- exchange students
+		- room type
+	- duration (from-to)
+
+- Set tall people (/admin/setTallPeople)
+
+- Edit user information (/admin/editUser)
+
+- Set points schema (/admin/setPointSchema) (?)
+
+- Set disabled rooms (/admin/disableRooms)
+
+- Set email options (/admin/email)
+
+- Import/export settings (/admin/import | /admin/export)
+
+- Export results (for phase N / overall)
+
+- Clear all data (reset for next year)

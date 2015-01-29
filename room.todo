@@ -1,0 +1,10 @@
+move from .json to mongodb (can be a prep step or smth)
+
+/room/getRooms (for a specific college)
+	- how many people applied
+	- is disabled or no?
+
+room.disableRoom
+room.updateRoom
+room.getRoom
+room.allocateRoom

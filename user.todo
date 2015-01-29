@@ -1,0 +1,9 @@
+/user/login
+/user/logout
+/user/me
+/user/updateCollege
+/user/requestRoommate
+/user/confirmRoommate
+/user/selectRooms
+
+user.calculatePoints (maybe based on custom rules?)

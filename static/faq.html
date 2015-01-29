@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jRooms</title>
+	<link rel="stylesheet" href="./lib/bootstrap/bootstrap.css"/>
+	<link rel="stylesheet" href="./css/style.css"/>
+</head>
+<body>
+	<!-- Fixed navbar -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">jRooms</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a id="homeLink" href="index.html">Home</a></li>
+          <li class="hidden" id="adminLink"><a href="admin.html">Admin</a></li>
+          <li class="active"><a href="faq.html">Issues?</a></li>
+          <li><a href="about.html">About</a>
+         </ul>
+         <ul class="nav navbar-nav navbar-right">
+         <li><a class="text-info" id="loginInfo"></a></li>
+         <li><a href="#" id="loginButton">Login</a></li>
+         </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="well well-lg">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae, aut eos quisquam dolore optio et expedita necessitatibus deleniti quibusdam rerum cum laboriosam magnam incidunt voluptas error in, iure inventore corporis.</p>
+      <br/>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Panel title</h3>
+        </div>
+        <div class="panel-body">
+          Panel content
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Panel title</h3>
+        </div>
+        <div class="panel-body">
+          Panel content
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Panel title</h3>
+        </div>
+        <div class="panel-body">
+          Panel content
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Panel title</h3>
+        </div>
+        <div class="panel-body">
+          Panel content
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Panel title</h3>
+        </div>
+        <div class="panel-body">
+          Panel content
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<script src="./lib/jquery/jquery.js"></script>
+	<script src="./lib/jquery-cookie/jquery.cookie.js"></script>
+	<script src="./lib/bootstrap/bootstrap.js"></script>
+	<script src="./js/openjub.js"></script>
+	<script src="./js/utils.js"></script>
+  <script>
+    window.addEventListener('JUB.LoginUpdated', function() {
+       	updateNav();
+    });
+
+    window.onload = function() {
+    	updateNav();
+    };
+  </script>
+</body>
+</html>

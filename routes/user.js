@@ -27,11 +27,35 @@ exports.login = function(req, res) {
 		headers: {'Cookie' : 'token=' + req.cookies.token}
 	}, function(err, response, body) {
 		var user = JSON.parse(response.body);
+		// console.log(response.body, user);
 		User.update({username: user.username}, {token: req.cookies.token}, function(err, numAffected) {
-			if(err || numAffected === 0) {
+			if(err) {
 				res
 				.status(404)
 				.send(null);
+				return;
+
+			} else if(numAffected === 0){ // new user
+
+				if(config.admins.indexOf( user.username ) === -1) {
+					res
+					.status(403)
+					.send(null);
+					return;
+				}
+				var new_user = new User({
+				name: user.fullName,
+				surname: user.lastName,
+				username: user.username,
+				eid: user.eid,
+				nationality: user.nationality,
+				graduation_year: user.year,
+				current_college: user.college
+			});
+			new_user.save();
+			res
+			.status(200)
+			.send(new_user);
 			} else {
 				User.findOne({username: user.username}, function(err, data) {
 					if(err) {

@@ -48,6 +48,7 @@ exports.load = function()
 		floor: Number,
 		type: String,
 		contains: Array,
+		enabled: Boolean
 	});
 
 	User = mongoose.model('User', userSchema);

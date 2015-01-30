@@ -18,6 +18,7 @@ app.use(function(req, res, next) {
 		res
 		.status(403)
 		.send("Invalid access token");
+		return;
 	}
 	if(req.originalUrl.indexOf("/admin/") === 0 ) {
 		admin.authorize(res, req.cookies.token, next);
@@ -41,9 +42,13 @@ app.use(function(req, res, next) {
 app.get('/user/me', user.me);
 app.get('/user/points', user.points);
 app.get('/admin/all', user.all);
+app.get('/admin/editUser/:user', admin.update_user);
+app.get('/admin/disableRooms/:rooms', admin.disable_rooms);
+app.get('/admin/fullreset', admin.full_reset);
 
 app.get('/admin/resetUsers', admin.reset_users);
 app.get('/user/resetUsers', user.reset_users);
+app.post('/user/setTallPeople/:tallPeople', admin.set_tall_people);
 app.post('/user/login', user.login);
 app.post('/user/logout/', user.logout);
 app.post('/user/addRoommate/:roommate', user.add_roommate);

@@ -1,6 +1,6 @@
 - Import OpenJUB data (/admin/getUsers) - DONE.
 
-- Set phases (/admin/setPhases)
+- Set phases (/admin/setPhases) // NOT DONE - Exist in mongoose, I'll worry tomorrow about what to do with them
 	- name
 	- filters
 		- points
@@ -10,18 +10,18 @@
 		- room type
 	- duration (from-to)
 
-- Set tall people (/admin/setTallPeople)
+- Set tall people (/admin/setTallPeople) // DONE. Keep in mind: will return number of affected users with OK(200) if everyone was set and Server Error(500) otherwise.
 
-- Edit user information (/admin/editUser)
+- Edit user information (/admin/editUser) // DONE. Send me a full user, otherwise I give no guarantee for full data.
 
-- Set points schema (/admin/setPointSchema) (?)
+- Set points schema (/admin/setPointSchema) (?)// NOT DONE - read the phases comment
 
-- Set disabled rooms (/admin/disableRooms)
+- Set disabled rooms (/admin/disableRooms) // DONE - read entry about tall people
 
-- Set email options (/admin/email)
+- Set email options (/admin/email) // Do we have email addresses at jacobs-cs.club?
 
-- Import/export settings (/admin/import | /admin/export)
+- Import/export settings (/admin/import | /admin/export) // I'm assuming JSON.
 
 - Export results (for phase N / overall)
 
-- Clear all data (reset for next year)
+- Clear all data (reset for next year) // endpoint to call is fullreset

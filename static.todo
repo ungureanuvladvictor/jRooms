@@ -1,0 +1,18 @@
+1) Just in case we forget, before you pass me an array as a parameter make sure you don't send me spaces. I don't think this matters but it's JavaScript, so who knows.
+
+2) For the user interface I was thinking something of the lines:
+
+
+############################################################################
+#               |                                                          #
+#  College:     | <show phase itself if active, show the result otherwise> #
+#--------------------------------------------------------------------------#
+#               |                                                          #
+#  Roommate:    | <show phase itself if active, show the result otherwise> #
+#--------------------------------------------------------------------------#
+#               |                                                          #
+#  Room:        | <show phase itself if active, show the result otherwise> #
+#               |                                                          #
+############################################################################
+
+And wrap this out as some sort of student profile to make it more 'appealable' :D

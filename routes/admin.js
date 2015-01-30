@@ -38,6 +38,31 @@ exports.authorize = function(res, token, next) {
 	});
 }
 
+exports.full_reset = function(req, res) {
+	User.find({}).remove().exec();
+	Room.find({}).remove().exec();
+	Round.find({}).remove().exec();
+	User.findOne({token: req.cookies.token}, function(err, data) {
+		if(err) {
+			res
+			.status(500)
+			.send(err);
+		}
+		else {
+			if(data) {
+				res
+				.status(500)
+				.send(data);
+			}
+			else {
+				res
+				.status(200)
+				.send(null);
+			}
+		}
+	});
+}
+
 exports.delete_users = function(req, res) { //I will leave the current user, otherwise we run into problems.
 	var token = req.cookies.token;
 	User.$where('this.token === token').remove().exec();
@@ -107,5 +132,39 @@ exports.set_tall_people = function(req, res) {
 		res
 		.status(200)
 		.send(modified);
+	}
+}
+
+exports.update_user = function(req, res) {
+	var updatedUser = req.params.user;
+	User.update({username: updatedUser.username}, updatedUser, function(err, data) {
+		if(err) {
+			res
+			.status(500)
+			.send(err);
+		} else {
+			res
+			.status(200)
+			.send(data);
+		}
+	})
+}
+
+exports.disable_rooms = function(req, res) {
+	var rooms = req.params.rooms;
+	var affected = 0;
+	rooms.forEach(function(room) {
+		Room.update({contains: room.contains}, {enabled: false}, function(err, numAffected) {
+			affected++;
+		})
+	});
+	if(affected === rooms.length) {
+		res
+		.status(200)
+		.send(affected);
+	} else {
+		res
+		.status(500)
+		.send(affected);
 	}
 }

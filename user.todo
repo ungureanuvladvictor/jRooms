@@ -1,7 +1,7 @@
-/user/login
-/user/logout
-/user/me
-/user/updateCollege
+/user/login // DONE
+/user/logout // DONE
+/user/me // DONE
+/user/updateCollege // DONE I'm assuming this is changing the college preferences. Renamed to updateColleges.
 /user/requestRoommate
 /user/confirmRoommate
 /user/selectRooms

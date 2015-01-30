@@ -288,3 +288,24 @@ exports.confirm_roommate = function(req, res) {
 		});
 	});
 }
+
+exports.updateColleges = function(req, res) {
+	//console.log(req);
+	var new_preference = req.params.colleges;
+	//console.log(new_preference);
+	User.update({token: req.cookies.token}, {college_preference: new_preference}, function(err, numAffected) {
+		if(err || numAffected === 0) {
+			res
+			.status(404)
+			.send(err);
+			return;
+		}
+
+		User.findOne({token: req.cookies.token}, function(err, data) {
+			res
+			.status(200)
+			.send(data);
+			return;
+		})
+	});
+}

@@ -48,6 +48,7 @@ app.get('/admin/fullreset', admin.full_reset);
 
 app.get('/admin/resetUsers', admin.reset_users);
 app.get('/user/resetUsers', user.reset_users);
+app.post('/user/updateColleges/:colleges', user.updateColleges);
 app.post('/user/setTallPeople/:tallPeople', admin.set_tall_people);
 app.post('/user/login', user.login);
 app.post('/user/logout/', user.logout);

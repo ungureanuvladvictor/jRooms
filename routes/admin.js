@@ -66,6 +66,7 @@ exports.full_reset = function(req, res) {
 exports.delete_users = function(req, res) { //I will leave the current user, otherwise we run into problems.
 	var token = req.cookies.token;
 	User.$where('this.token === token').remove().exec();
+	database_is_empty = true;
 }
 
 exports.reset_users = function(req, res) {
@@ -80,6 +81,15 @@ exports.reset_users = function(req, res) {
 		uri: url,
 		headers: {'Cookie' : 'token=' + token}
 	}, function(err, response, body) {
+		if(err) {
+			res.status(500).send(err);
+			return;
+		}
+		else {
+			res
+			.status(200)
+			.send();
+		}
 		var users = JSON.parse(response.body).data;
 		var fin = [];
 		users.forEach(function(item){ // I know this is blocking, but I want to return the whole array
@@ -108,12 +118,8 @@ exports.reset_users = function(req, res) {
 
 			user.save();
 		});
-
-
-		res
-		.status(200)
-		.send(JSON.stringify(fin));
 	});
+	database_is_empty = true;
 }
 
 exports.set_tall_people = function(req, res) {
@@ -167,4 +173,13 @@ exports.disable_rooms = function(req, res) {
 		.status(500)
 		.send(affected);
 	}
+}
+
+exports.add_round = function(req, res) {
+	var round = req.params.round;
+	var roundRound = new Round(round);
+	roundRound.save();
+	res
+	.status(200)
+	.send(roundRound);
 }

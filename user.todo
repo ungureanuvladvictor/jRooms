@@ -2,8 +2,8 @@
 /user/logout // DONE
 /user/me // DONE
 /user/updateCollege // DONE I'm assuming this is changing the college preferences. Renamed to updateColleges.
-/user/requestRoommate
-/user/confirmRoommate
+/user/requestRoommate // DONE It's under addRoommate
+/user/confirmRoommate // DONE It's under confirmRoommate
 /user/selectRooms
 
 user.calculatePoints (maybe based on custom rules?)

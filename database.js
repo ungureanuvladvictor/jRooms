@@ -1,5 +1,7 @@
 var config = require('./config.json');
 
+database_is_empty = true;
+
 exports.load = function()
 {
 	mongoose = require('mongoose');
@@ -24,17 +26,20 @@ exports.load = function()
 		college_preference : Array,
 		next_college : String,
 		token: String,
-		is_tall: Boolean
+		is_tall: Boolean,
+		is_exchange: Boolean,
+		round: String
 	});
 
 	roundSchema = new Schema({
 		name : String,
 		filters : {
+			college_phase: Boolean,
 			points: Number, // lower cutoff
 			college: String,
 			tall_people: Boolean,
 			exchange_students: Boolean,
-			room_type: Number // Single room phase, Tall room phase, Triple room phase
+			room_type: String // Single room phase, Tall room phase, Triple room phase
 		},
 		duration: {
 			start: Date,

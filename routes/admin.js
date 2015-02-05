@@ -38,29 +38,9 @@ exports.authorize = function(res, token, next) {
 	});
 }
 
-exports.full_reset = function(req, res) {
+exports.nuke = function(req, res) {
 	User.find({}).remove().exec();
-	Room.find({}).remove().exec();
 	Round.find({}).remove().exec();
-	User.findOne({token: req.cookies.token}, function(err, data) {
-		if(err) {
-			res
-			.status(500)
-			.send(err);
-		}
-		else {
-			if(data) {
-				res
-				.status(500)
-				.send(data);
-			}
-			else {
-				res
-				.status(200)
-				.send(null);
-			}
-		}
-	});
 }
 
 exports.delete_users = function(req, res) { //I will leave the current user, otherwise we run into problems.
@@ -182,4 +162,8 @@ exports.add_round = function(req, res) {
 	res
 	.status(200)
 	.send(roundRound);
+}
+
+exports.update_round = function() {
+
 }

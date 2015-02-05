@@ -24,14 +24,18 @@ app.use(function(req, res, next) {
 		return;
 	}
 	if(req.originalUrl.indexOf("/admin/") === 0 ) {
-		if(req.originalUrl === "/admin/resetUsers") {
+		if(database_is_empty) {
+			if(req.originalUrl === "/admin/resetUsers") {
+				admin.authorize(res, req.cookies.token, next);
+			}
+			else { // only needed for the admins
+				res
+				.status(400)
+				.send("Database is empty");
+				return;
+			}
+		} else {
 			admin.authorize(res, req.cookies.token, next);
-		}
-		else { // only needed for the admins
-			res
-			.status(400)
-			.send("Database is empty");
-			return;
 		}
 	} else {
 		
@@ -56,7 +60,7 @@ app.get('/user/points', user.points);
 app.get('/admin/all', user.all);
 app.get('/admin/editUser/:user', admin.update_user);
 app.get('/admin/disableRooms/:rooms', admin.disable_rooms);
-app.get('/admin/fullreset', admin.full_reset);
+app.get('/admin/nuke', admin.nuke);
 
 app.get('/admin/resetUsers', admin.reset_users);
 app.get('/results/:currentPhase', results.phase_results);

@@ -99,7 +99,7 @@ exports.reset_users = function(req, res) {
 			user.save();
 		});
 	});
-	database_is_empty = true;
+	database_is_empty = false;
 }
 
 exports.set_tall_people = function(req, res) {

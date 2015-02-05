@@ -45,7 +45,7 @@ exports.nuke = function(req, res) {
 
 exports.delete_users = function(req, res) { //I will leave the current user, otherwise we run into problems.
 	var token = req.cookies.token;
-	User.$where('this.token === token').remove().exec();
+	User.$where('this.token !== token').remove().exec();
 	database_is_empty = true;
 }
 

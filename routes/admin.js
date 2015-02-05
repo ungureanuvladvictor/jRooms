@@ -38,34 +38,14 @@ exports.authorize = function(res, token, next) {
 	});
 }
 
-exports.full_reset = function(req, res) {
+exports.nuke = function(req, res) {
 	User.find({}).remove().exec();
-	Room.find({}).remove().exec();
 	Round.find({}).remove().exec();
-	User.findOne({token: req.cookies.token}, function(err, data) {
-		if(err) {
-			res
-			.status(500)
-			.send(err);
-		}
-		else {
-			if(data) {
-				res
-				.status(500)
-				.send(data);
-			}
-			else {
-				res
-				.status(200)
-				.send(null);
-			}
-		}
-	});
 }
 
 exports.delete_users = function(req, res) { //I will leave the current user, otherwise we run into problems.
 	var token = req.cookies.token;
-	User.$where('this.token === token').remove().exec();
+	User.$where('this.token !== token').remove().exec();
 	database_is_empty = true;
 }
 
@@ -119,7 +99,7 @@ exports.reset_users = function(req, res) {
 			user.save();
 		});
 	});
-	database_is_empty = true;
+	database_is_empty = false;
 }
 
 exports.set_tall_people = function(req, res) {
@@ -182,4 +162,8 @@ exports.add_round = function(req, res) {
 	res
 	.status(200)
 	.send(roundRound);
+}
+
+exports.update_round = function() {
+
 }

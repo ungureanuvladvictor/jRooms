@@ -28,7 +28,7 @@ exports.load = function()
 		token: String,
 		is_tall: Boolean,
 		is_exchange: Boolean,
-		round: String
+		round_name: String
 	});
 
 	roundSchema = new Schema({

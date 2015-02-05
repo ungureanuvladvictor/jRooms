@@ -39,8 +39,10 @@
 
   <div class="container well well-lg">
     <h3>Import OpenJUB data</h3>
-    <p>We will use your auth token to retrieve a list of students from OpenJUB.</p> <p class="text-danger">Please, note, that this step is a prerequisite for everything else to work.</p>
-    <a class="btn btn-default btn-danger" href="#importjub" onclick="" role="button">Let's do it!</a>
+    <div id="importWarning">
+      <p>We will use your auth token to retrieve a list of students from OpenJUB.</p> <p class="text-danger">Please, note, that this step is a prerequisite for everything else to work.</p>
+      <a class="btn btn-default btn-danger" href="#importUsers" onclick="importUsers();" role="button">Let's do it!</a>
+    </div>
   </div>
 
   <div class="container well well-lg">
@@ -69,10 +71,144 @@
                 <div class="form-group">
                   <input type="text" class="form-control" data-provide="datepicker" data-date-format="dd/mm/yy" id="phaseTo0" placeholder="To">
                 </div>
-                <br/>
-                <br/>
-                <a class="btn btn-default btn-success" href="#save" id="phaseSave0" onclick="savePhase(this.id);" role="button">Save</a>
               </form>
+              </br>
+              <h4>Filters:</h4>
+              <div class="form-group"> 
+                <div class="checkbox">
+                  <label>
+                  <input type="checkbox" onclick="toggleCollegePhase(this.id, this.checked);" id="phaseCollegePhaseOn0">
+                    College selection phase
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group"> 
+                <div class="checkbox">
+                  <label>
+                  <input type="checkbox" onclick="togglePhaseFilterPoints(this.id, this.checked);" id="phaseFilterPointsOn0">
+                    Points
+                  </label>
+                </div>
+
+                <div class="hidden" id="phaseFilterPoints0">
+                  <form class="form-inline">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="phaseFilterPointsMin0" placeholder="Min">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="phaseFilterPointsMax0" placeholder="Max">
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              <div class="form-group"> 
+                <div class="checkbox">
+                  <label>
+                  <input type="checkbox" onclick="togglePhaseFilterCollege(this.id, this.checked);" id="phaseFilterCollegeOn0">
+                    College
+                  </label>
+                </div>
+
+                <div class="hidden" id="phaseFilterCollege0">
+                  <div class="form-group">
+                    <div class="checkbox">
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <label>
+                      <input type="checkbox" id="phaseFilterCollegeKrupp0">
+                        Krupp
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <label>
+                      <input type="checkbox" id="phaseFilterCollegeNordmetall0">
+                        Nordmetall
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <label>
+                      <input type="checkbox" id="phaseFilterCollegeMercator0">
+                        Mercator
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <label>
+                      <input type="checkbox" id="phaseFilterCollegeC30">
+                        College 3
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="form-group"> 
+                <div class="checkbox">
+                  <label>
+                  <input type="checkbox" onclick="togglePhaseFilterTall(this.id, this.checked);" id="phaseFilterTallOn0">
+                    Tall people
+                  </label>
+                </div>
+
+                <div class="hidden" id="phaseFilterTall0">
+
+                </div>
+              </div>
+
+              <div class="form-group"> 
+                <div class="checkbox">
+                  <label>
+                  <input type="checkbox" onclick="togglePhaseFilterExchange(this.id, this.checked);" id="phaseFilterExchangeOn0">
+                    Exchange students
+                  </label>
+                </div>
+
+                <div class="hidden" id="phaseFilterExchange0">
+
+                </div>
+              </div>
+              
+              <div class="form-group"> 
+                <div class="checkbox">
+                  <label>
+                  <input type="checkbox" onclick="togglePhaseFilterRoom(this.id, this.checked);" id="phaseFilterRoomOn0">
+                    Room type
+                  </label>
+                </div>
+
+                <div class="hidden" id="phaseFilterRoom0">
+                  <div class="form-group">
+                    <div class="checkbox">
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <label>
+                      <input type="checkbox" id="phaseFilterRoomSingle0">
+                        Single
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <label>
+                      <input type="checkbox" id="phaseFilterCollegeRoomDouble0">
+                        Double
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <label>
+                      <input type="checkbox" id="phaseFilterCollegeRoomTriple0">
+                        Triple
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <br/>
+              <a class="btn btn-default btn-success" href="#savePhase" id="phaseSave0" onclick="savePhase(this.id);" role="button">Save</a>
+              <a class="btn btn-default btn-danger" href="#removePhase" id="phaseSave0" onclick="removePhase(this.id);" role="button">Remove</a>
             </div>
           </div>
         </div>
@@ -110,7 +246,7 @@
   <div class="container well well-lg">
     <h3>Email options</h3>
     <p>Don't spam the community too much!</p>
-    <div class="form-grouo">
+    <div class="form-group">
       <div class="checkbox">
         <label>
         <input type="checkbox" id="email1">
@@ -187,6 +323,17 @@
       });
 
       var settings = {};
+
+      var importUsers = function() {
+        var req = $.get(JUB.url + '/admin/resetUsers', {}, function(data) {
+          $('#importWarning').html('<p class="text-success">Done!</p>');
+        });
+
+        req.fail(function(err) {
+          console.log('User import failed: ', err);
+        })
+      }
+
       var phaseCount = 0;
       var phaseTemplate = $('#phase0');
       var phaseList = $('#phaseList');
@@ -208,6 +355,86 @@
 
         if (id === phaseCount) {
           newPhase();
+        }
+      }
+
+      var togglePhaseFilterPoints = function(id, val) {
+        var i = parseInt(id.replace('phaseFilterPointsOn',''));
+        var container = $('#phaseFilterPoints' + i);
+
+        if (val) {
+          container.removeClass('hidden');
+        }
+        else {
+          container.addClass('hidden');
+        }
+      }
+
+
+      var togglePhaseFilterCollege = function(id, val) {
+        var i = parseInt(id.replace('phaseFilterCollegeOn',''));
+        var container = $('#phaseFilterCollege' + i);
+
+        if (val) {
+          container.removeClass('hidden');
+        }
+        else {
+          container.addClass('hidden');
+        }
+
+      }
+
+      var togglePhaseFilterTall = function(id, val) {
+        var i = parseInt(id.replace('phaseFilterTallOn',''));
+        var container = $('#phaseFilterTall' + i);
+
+        if (val) {
+          container.removeClass('hidden');
+        }
+        else {
+          container.addClass('hidden');
+        }
+      }
+
+      var togglePhaseFilterExchange = function(id, val) {
+        var i = parseInt(id.replace('phaseFilterExchangeOn',''));
+        var container = $('#phaseFilterExchange' + i);
+
+        if (val) {
+          container.removeClass('hidden');
+        }
+        else {
+          container.addClass('hidden');
+        }
+      }
+
+      var togglePhaseFilterRoom = function(id, val) {
+        var i = parseInt(id.replace('phaseFilterRoomOn',''));
+        var container = $('#phaseFilterRoom' + i);
+
+        if (val) {
+          container.removeClass('hidden');
+        }
+        else {
+          container.addClass('hidden');
+        }
+      }
+
+      var toggleCollegePhase = function(id, val) {
+        var i = parseInt(id.replace('phaseCollegePhaseOn',''));
+        if (val) {
+          $('#phaseFilterPointsOn'+i).attr('disabled', true);
+          $('#phaseFilterCollegeOn'+i).attr('disabled', true);
+          $('#phaseFilterTallOn'+i).attr('disabled', true);
+          $('#phaseFilterExchangeOn'+i).attr('disabled', true);
+          $('#phaseFilterRoomOn'+i).attr('disabled', true);
+        }
+        else {
+          $('#phaseFilterPointsOn'+i).attr('disabled', false);
+          $('#phaseFilterCollegeOn'+i).attr('disabled', false);
+          $('#phaseFilterTallOn'+i).attr('disabled', false);
+          $('#phaseFilterExchangeOn'+i).attr('disabled', false);
+          $('#phaseFilterRoomOn'+i).attr('disabled', false);
         }
       }
 

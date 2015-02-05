@@ -45,20 +45,22 @@ exports.login = function(req, res) {
 				}
 
 				var new_user = new User({
-				name: user.fullName,
-				surname: user.lastName,
-				username: user.username,
-				eid: user.eid,
-				nationality: user.nationality,
-				graduation_year: user.year,
-				current_college: user.college
+					name: user.fullName,
+					surname: user.lastName,
+					username: user.username,
+					eid: user.eid,
+					nationality: user.nationality,
+					graduation_year: user.year,
+					current_college: user.college,
+					token: req.cookies.token
 				});
 
-			new_user.save();
-			res
-			.status(200)
-			.send(new_user);
-			return;
+				new_user.save();
+				console.log(new_user);
+				res
+				.status(200)
+				.send(new_user);
+				return;
 
 			} else {
 				User.findOne({username: user.username}, function(err, data) {

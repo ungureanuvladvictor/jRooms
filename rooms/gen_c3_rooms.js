@@ -27,13 +27,13 @@ var floor1 = [
 	[34, -12, 8, 5, "CB 128/129", ["CB-128","CB-129"], "student"],
 	[42, -12, 8, 5, "CB 124/125", ["CB-124","CB-125"], "student"],
 
-	
+
 	[13, 12, 39, 2, "CA1 Corridor", [""], "cor"],
 	[13, -14, 39, 2, "CB1 Corridor", [""], "cor"],
 
 	[54, -19, 12, 12, "Kitchen", [""], "main_kitchen"],
 	[52, -7, 16, 26, "Servery", ["C3-Servery"], "kitchen"],
-	
+
 	[54, 7, 3, 3, "Stairs", [""], "stairs"],
 	[54, 10, 3, 2, "Elevator", [""], "stairs"],
 	[52, -19, 2, 12, "CBA Corridor", [""], "cor"],
@@ -237,13 +237,13 @@ fls = []
 
 for(i = 0; i < floors.length; i++) {
 	floor = floors[i];
-	
+
 	var fl_a = new Object();
 	var fl_b = new Object();
 	var fl_c = new Object();
 	var fl_d = new Object();
 	var fl_e = new Object();
-	
+
 	fl_a['number'] = i + 1;
 	fl_b['number'] = i + 1;
 	fl_c['number'] = i + 1;
@@ -304,4 +304,4 @@ exports.collegethree = collegethree
 //     } else {
 //       console.log("JSON saved to " + outputFilename);
 //     }
-// }); 
+// });

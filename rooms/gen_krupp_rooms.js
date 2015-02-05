@@ -10,7 +10,7 @@ var floor1 = [
 		[0, 28, 5, 8, "KA 128/129", ["KA-128","KA-129"], "student"],
 		[0, 36, 5, 8, "KA 124/125", ["KA-124","KA-125"], "student"],
 		[0, 44, 5, 2, "KA1 Stairs", [""], "stairs"],
-		
+
 		[5, 9, 2, 40, "KA1 Corridor", [""], "cor"],
 
 		[7, 12, 5, 8, "KA 108/109", ["KA-108","KA-109"], "student"],
@@ -28,7 +28,7 @@ var floor1 = [
 		[24, 28, 5, 8, "KB 128/129", ["KB-128","KB-129"], "student"],
 		[24, 36, 5, 8, "KB 124/125", ["KB-124","KB-125"], "student"],
 		[24, 44, 5, 2, "KB1 Stairs", [""], "stairs"],
-		
+
 		[29, 9, 2, 40, "KB1 Corridor", [""], "cor"],
 
 		[31, 12, 5, 8, "KB 108/109", ["KB-108","KB-109"], "student"],
@@ -46,7 +46,7 @@ var floor1 = [
 		[48, 28, 5, 8, "KC 128/129", ["KC-128","KC-129"], "student"],
 		[48, 36, 5, 8, "KC 124/125", ["KC-124","KC-125"], "student"],
 		[48, 44, 5, 2, "KC1 Stairs", [""], "stairs"],
-		
+
 		[53, 9, 2, 40, "KC1 Corridor", [""], "cor"],
 
 		[55, 12, 5, 8, "KC 108/109", ["KC-108","KC-109"], "student"],
@@ -71,7 +71,7 @@ var floor1 = [
 		[0, 28, 5, 8, "KA 228/229", ["KA-228","KA-229"], "student"],
 		[0, 36, 5, 8, "KA 224/225", ["KA-224","KA-225"], "student"],
 		[0, 44, 5, 2, "KA2 Stairs", [""], "stairs"],
-		
+
 		[5, 9, 2, 40, "KA2 Corridor", [""], "cor"],
 
 		[7, 12, 5, 8, "KA 208/209", ["KA-208","KA-209"], "student"],
@@ -90,7 +90,7 @@ var floor1 = [
 		[24, 28, 5, 8, "KB 228/229", ["KB-228","KB-229"], "student"],
 		[24, 36, 5, 8, "KB 224/225", ["KB-224","KB-225"], "student"],
 		[24, 44, 5, 2, "KB2 Stairs", [""], "stairs"],
-		
+
 		[29, 9, 2, 40, "KB2 Corridor", [""], "cor"],
 
 		[31, 12, 5, 8, "KB 208/209", ["KB-208","KB-209"], "student"],
@@ -109,7 +109,7 @@ var floor1 = [
 		[48, 28, 5, 8, "KC 228/229", ["KC-228","KC-229"], "student"],
 		[48, 36, 5, 8, "KC 224/225", ["KC-224","KC-225"], "student"],
 		[48, 44, 5, 2, "KC2 Stairs", [""], "stairs"],
-		
+
 		[53, 9, 2, 40, "KC2 Corridor", [""], "cor"],
 
 		[55, 12, 5, 8, "KC 208/209", ["KC-208","KC-209"], "student"],
@@ -127,7 +127,7 @@ var floor1 = [
 		[24, 46, 36, 2, "KD3 Corridor", ["KD-213"], "cor"],
 		[24, 46, 36, 2, "KD3 Corridor", ["KD-215"], "cor"],
 		[24, 46, 36, 2, "KD3 Corridor", ["KD-217"], "cor"]
-	]; 
+	];
 
 	var floor3 = [
 				//A-Block
@@ -140,7 +140,7 @@ var floor1 = [
 		[0, 28, 5, 8, "KA 328/229", ["KA-328","KA-329"], "student"],
 		[0, 36, 5, 8, "KA 324/225", ["KA-324","KA-325"], "student"],
 		[0, 44, 5, 2, "KA3 Stairs", [""], "stairs"],
-		
+
 		[5, 9, 2, 40, "KA3 Corridor", [""], "cor"],
 
 		[7, 12, 5, 8, "KA 308/209", ["KA-308","KA-309"], "student"],
@@ -148,7 +148,7 @@ var floor1 = [
 		[7, 28, 5, 8, "KA 316/217", ["KA-316","KA-317"], "student"],
 		[7, 36, 5, 8, "KA 320/221", ["KA-320","KA-321"], "student"],
 		[7, 44, 5, 2, "KA3 Kitchen", [""], "kitchen"],
-	
+
 		//B-Block
 		[24, 1, 12, 8, "KB 301/302/203", ["KB-301","KB-302","KB-303"], "student"],
 		[24, 4, 5, 8, "KB 340/241", ["KB-340","KB-341"], "student"],
@@ -159,7 +159,7 @@ var floor1 = [
 		[24, 28, 5, 8, "KB 328/229", ["KB-328","KB-329"], "student"],
 		[24, 36, 5, 8, "KB 324/225", ["KB-324","KB-325"], "student"],
 		[24, 44, 5, 2, "KB3 Stairs", [""], "stairs"],
-		
+
 		[29, 9, 2, 40, "KB3 Corridor", [""], "cor"],
 
 		[31, 12, 5, 8, "KB 308/209", ["KB-308","KB-309"], "student"],
@@ -178,7 +178,7 @@ var floor1 = [
 		[48, 28, 5, 8, "KC 328/229", ["KC-328","KC-329"], "student"],
 		[48, 36, 5, 8, "KC 324/225", ["KC-324","KC-325"], "student"],
 		[48, 44, 5, 2, "KC3 Stairs", [""], "stairs"],
-		
+
 		[53, 9, 2, 40, "KC3 Corridor", [""], "cor"],
 
 		[55, 12, 5, 8, "KC 308/209", ["KC-308","KC-309"], "student"],
@@ -224,12 +224,12 @@ fls = []
 
 for(i = 0; i < floors.length; i++) {
 	floor = floors[i];
-	
+
 	var fl_a = new Object();
 	var fl_b = new Object();
 	var fl_c = new Object();
 	var fl_d = new Object();
-	
+
 	fl_a['number'] = i + 1;
 	fl_b['number'] = i + 1;
 	fl_c['number'] = i + 1;
@@ -285,4 +285,4 @@ exports.krupp = krupp
 //     } else {
 //       console.log("JSON saved to " + outputFilename);
 //     }
-// }); 
+// });

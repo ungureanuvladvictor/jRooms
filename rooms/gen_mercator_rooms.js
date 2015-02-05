@@ -10,7 +10,7 @@ var floor1 = [
 		[0, 28, 5, 8, "MA 128/129", ["MA-128","MA-129"], "student"],
 		[0, 36, 5, 8, "MA 124/125", ["MA-124","MA-125"], "student"],
 		[0, 44, 5, 2, "MA1 Stairs", [""], "stairs"],
-		
+
 		[5, 9, 2, 40, "MA1 Corridor", [""], "cor"],
 
 		[7, 12, 5, 8, "MA 108/109", ["MA-108","MA-109"], "student"],
@@ -28,7 +28,7 @@ var floor1 = [
 		[24, 28, 5, 8, "MB 128/129", ["MB-128","MB-129"], "student"],
 		[24, 36, 5, 8, "MB 124/125", ["MB-124","MB-125"], "student"],
 		[24, 44, 5, 2, "MB1 Stairs", [""], "stairs"],
-		
+
 		[29, 9, 2, 40, "MB1 Corridor", [""], "cor"],
 
 		[31, 12, 5, 8, "MB 108/109", ["MB-108","MB-109"], "student"],
@@ -46,7 +46,7 @@ var floor1 = [
 		[48, 28, 5, 8, "MC 128/129", ["MC-128","MC-129"], "student"],
 		[48, 36, 5, 8, "MC 124/125", ["MC-124","MC-125"], "student"],
 		[48, 44, 5, 2, "MC1 Stairs", [""], "stairs"],
-		
+
 		[53, 9, 2, 40, "MC1 Corridor", [""], "cor"],
 
 		[55, 12, 5, 8, "MC 108/109", ["MC-108","MC-109"], "student"],
@@ -70,7 +70,7 @@ var floor1 = [
 		[0, 28, 5, 8, "MA 228/229", ["MA-228","MA-229"], "student"],
 		[0, 36, 5, 8, "MA 224/225", ["MA-224","MA-225"], "student"],
 		[0, 44, 5, 2, "MA2 Stairs", [""], "stairs"],
-		
+
 		[5, 9, 2, 40, "MA2 Corridor", [""], "cor"],
 
 		[7, 12, 5, 8, "MA 208/209", ["MA-208","MA-209"], "student"],
@@ -89,7 +89,7 @@ var floor1 = [
 		[24, 28, 5, 8, "MB 228/229", ["MB-228","MB-229"], "student"],
 		[24, 36, 5, 8, "MB 224/225", ["MB-224","MB-225"], "student"],
 		[24, 44, 5, 2, "MB2 Stairs", [""], "stairs"],
-		
+
 		[29, 9, 2, 40, "MB2 Corridor", [""], "cor"],
 
 		[31, 12, 5, 8, "MB 208/209", ["MB-208","MB-209"], "student"],
@@ -108,7 +108,7 @@ var floor1 = [
 		[48, 28, 5, 8, "MC 228/229", ["MC-228","MC-229"], "student"],
 		[48, 36, 5, 8, "MC 224/225", ["MC-224","MC-225"], "student"],
 		[48, 44, 5, 2, "MC2 Stairs", [""], "stairs"],
-		
+
 		[53, 9, 2, 40, "MC2 Corridor", [""], "cor"],
 
 		[55, 12, 5, 8, "MC 208/209", ["MC-208","MC-209"], "student"],
@@ -124,7 +124,7 @@ var floor1 = [
 		[24, 46, 36, 2, "MD3 Corridor", ["MD-213"], "cor"],
 		[24, 46, 36, 2, "MD3 Corridor", ["MD-215"], "cor"],
 		[24, 46, 36, 2, "MD3 Corridor", ["MD-217"], "cor"]
-	]; 
+	];
 
 	var floor3 = [
 				//A-Block
@@ -137,7 +137,7 @@ var floor1 = [
 		[0, 28, 5, 8, "MA 328/229", ["MA-328","MA-329"], "student"],
 		[0, 36, 5, 8, "MA 324/225", ["MA-324","MA-325"], "student"],
 		[0, 44, 5, 2, "MA3 Stairs", [""], "stairs"],
-		
+
 		[5, 9, 2, 40, "MA3 Corridor", [""], "cor"],
 
 		[7, 12, 5, 8, "MA 308/209", ["MA-308","MA-309"], "student"],
@@ -145,7 +145,7 @@ var floor1 = [
 		[7, 28, 5, 8, "MA 316/217", ["MA-316","MA-317"], "student"],
 		[7, 36, 5, 8, "MA 320/221", ["MA-320","MA-321"], "student"],
 		[7, 44, 5, 2, "MA3 Kitchen", [""], "kitchen"],
-	
+
 		//B-Block
 		[24, 1, 12, 8, "MB 301/302/203", ["MB-301","MB-302","MB-303"], "student"],
 		[24, 4, 5, 8, "MB 340/241", ["MB-340","MB-341"], "student"],
@@ -156,7 +156,7 @@ var floor1 = [
 		[24, 28, 5, 8, "MB 328/229", ["MB-328","MB-329"], "student"],
 		[24, 36, 5, 8, "MB 324/225", ["MB-324","MB-325"], "student"],
 		[24, 44, 5, 2, "MB3 Stairs", [""], "stairs"],
-		
+
 		[29, 9, 2, 40, "MB3 Corridor", [""], "cor"],
 
 		[31, 12, 5, 8, "MB 308/209", ["MB-308","MB-309"], "student"],
@@ -175,7 +175,7 @@ var floor1 = [
 		[48, 28, 5, 8, "MC 328/229", ["MC-328","MC-329"], "student"],
 		[48, 36, 5, 8, "MC 324/225", ["MC-324","MC-325"], "student"],
 		[48, 44, 5, 2, "MC3 Stairs", [""], "stairs"],
-		
+
 		[53, 9, 2, 40, "MC3 Corridor", [""], "cor"],
 
 		[55, 12, 5, 8, "MC 308/209", ["MC-308","MC-309"], "student"],
@@ -218,12 +218,12 @@ fls = []
 
 for(i = 0; i < floors.length; i++) {
 	floor = floors[i];
-	
+
 	var fl_a = new Object();
 	var fl_b = new Object();
 	var fl_c = new Object();
 	var fl_d = new Object();
-	
+
 	fl_a['number'] = i + 1;
 	fl_b['number'] = i + 1;
 	fl_c['number'] = i + 1;
@@ -278,4 +278,4 @@ exports.mercator = mercator
 //     } else {
 //       console.log("JSON saved to " + outputFilename);
 //     }
-// }); 
+// });
